@@ -11,9 +11,11 @@ const path = require('path')
 //static photo
 app.use(express.static(path.join(__dirname,'public')))
 
+//hien thi post
 app.use(express.urlencoded({
   extended:true
 }))
+
 app.use(express.json())
 
 
@@ -31,10 +33,17 @@ app.get('/', (req, res) => {
   res.render('home');
 })
 
-app.post('/',(req,res) =>{
-  console.log(req.body.q)
-  res.render('news')
+//sau khi vào trang search
+app.get('/search',(req,res) =>{
+  res.render('search')
 })
+
+//sau khi submit ở form 
+app.post('/search',(req,res) =>{
+  console.log(req.body.q) //hiển thị data có key(name) là q 
+  res.render('home');
+})
+
 
 
 app.listen(port, () => {
